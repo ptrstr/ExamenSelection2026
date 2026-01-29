@@ -40,18 +40,9 @@ jobs:
               run: |
                   poetry build
 
-    bob:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Get Next Version
-              run: |
-                  echo ${{ github.event.pull_request.head.ref }}
-                  echo ${{ github.event.pull_request.base.ref }}
-                  echo ${{ github.event.pull_request.head.label }}
-                  echo ${{ github.event.pull_request.base.label }}
     tag:
         runs-on: ubuntu-latest
-        if: ${{ github.event.pull_request.head.label == 'master' }}
+        if: ${{ github.event.pull_request.base.ref == 'master' }}
         defaults:
             run:
                 working-directory: ./DevOps/fastapi-app
