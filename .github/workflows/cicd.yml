@@ -39,11 +39,27 @@ jobs:
             - name: Build
               run: |
                   poetry build
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
+    tag:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.pull_request.base.label == 'master' }}
+        defaults:
+            run:
+                working-directory: ./DevOps/fastapi-app
+
+        steps:
+            - name: Get Next Version
+              id: semver
+              uses: ietf-tools/semver-action@v1
               with:
-                  node-version: "lts/*"
-            - name: Release
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: npx semantic-release
+                token: ${{ github.token }}
+                branch: master
+            - name: Create tag
+              uses: actions/github-script@v8
+              with:
+                  script: |
+                      github.rest.git.createRef({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        ref: "refs/tags/${{ steps.semver.outputs.next }}",
+                        sha: context.sha
+                      })
