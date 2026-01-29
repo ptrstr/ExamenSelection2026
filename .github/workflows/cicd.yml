@@ -45,8 +45,8 @@ jobs:
         steps:
             - name: Get Next Version
               run: |
-                  echo ${{ github.event.pull_request.head }}
-                  echo ${{ github.event.pull_request.base }}
+                  echo ${{ github.event.pull_request.head.ref }}
+                  echo ${{ github.event.pull_request.base.ref }}
                   echo ${{ github.event.pull_request.head.label }}
                   echo ${{ github.event.pull_request.base.label }}
     tag:
