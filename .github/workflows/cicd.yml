@@ -39,6 +39,16 @@ jobs:
             - name: Build
               run: |
                   poetry build
+
+    bob:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get Next Version
+              run: |
+                  echo ${{ github.event.pull_request.head }}
+                  echo ${{ github.event.pull_request.base }}
+                  echo ${{ github.event.pull_request.head.label }}
+                  echo ${{ github.event.pull_request.base.label }}
     tag:
         runs-on: ubuntu-latest
         if: ${{ github.event.pull_request.head.label == 'master' }}
@@ -51,8 +61,8 @@ jobs:
               id: semver
               uses: ietf-tools/semver-action@v1
               with:
-                token: ${{ github.token }}
-                branch: master
+                  token: ${{ github.token }}
+                  branch: master
             - name: Create tag
               uses: actions/github-script@v8
               with:
