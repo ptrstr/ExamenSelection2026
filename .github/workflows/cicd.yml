@@ -54,6 +54,7 @@ jobs:
               with:
                   token: ${{ github.token }}
                   branch: master
+                  fallbackTag: 1.0.0
             - name: Create tag
               uses: actions/github-script@v8
               with:
