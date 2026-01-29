@@ -1,13 +1,13 @@
 name: Show day every hour ??
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 * * * *"
+    workflow_dispatch:
+    schedule:
+        - cron: "0 * * * *"
 
 jobs:
-  show-time:
-    runs-on: ubuntu-latest
-    steps:
-        - name: Show time
-          run: |
-            date '+%F'
+    show-time:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Show time
+              run: |
+                  date '+%F'
