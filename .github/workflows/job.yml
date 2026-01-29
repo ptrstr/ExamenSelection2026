@@ -5,7 +5,7 @@ on:
     - cron: "0 * * * *"
 
 jobs:
-  stale:
+  show-time:
     runs-on: ubuntu-latest
     steps:
         - name: Show time
