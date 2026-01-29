@@ -1,5 +1,7 @@
+blind sql injection
 flag-(PwNedCs2026)
 
+set jwt username to admin. no jwt signature verif
 flag-(PwN95-Win95)
 
 
